@@ -11,6 +11,7 @@ import { PokemonEffects } from './effects/pokemon.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PokemonComponent } from './pokemon/pokemon.component';
+import { PokemonService } from './services/pokemon.service';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { PokemonComponent } from './pokemon/pokemon.component';
     HttpClientModule,
     StoreDevtoolsModule.instrument({ maxAge: 10 })
   ],
-  providers: [],
+  providers: [PokemonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

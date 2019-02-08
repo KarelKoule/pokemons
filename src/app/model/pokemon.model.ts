@@ -3,4 +3,8 @@ export type Pokemon = {
   name: string
 }
 
+export type PokemonDetail = any
+
+
+
 export type PokemonList = Pokemon[]

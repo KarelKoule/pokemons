@@ -8,7 +8,7 @@ export interface State {
 }
 
 export const initialState: State = {
-  pokemons: [{ name: "kokos", url: "papaa" }]
+  pokemons: []
 }
 
 export function reducer(state = initialState, action: PokemonActions): State {
@@ -16,6 +16,9 @@ export function reducer(state = initialState, action: PokemonActions): State {
     case PokemonActionTypes.PokemonsLoaded:
       console.log("loaded " + action.payload)
       return { ...state, pokemons: action.payload }
+    case PokemonActionTypes.ClearPokemons:
+      console.log('clearing pokemons')
+      return { ...state, pokemons: [] }
     default:
       return state
   }
