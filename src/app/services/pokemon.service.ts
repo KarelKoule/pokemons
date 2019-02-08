@@ -23,8 +23,4 @@ export class PokemonService {
   pokemonsList$ = this.pokemons$.pipe(
     combineLatest(this.needLoadPokemons$.pipe(startWith(true)), (a, b) => a))
 
-
-
-
-
 }
