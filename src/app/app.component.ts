@@ -1,49 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { LoadPokemons, ClearPokemons } from './actions/pokemon.actions';
-import { State } from './reducers';
-import { Observable, from } from 'rxjs';
-import { PokemonList } from './model/pokemon.model';
-import { PokemonService } from './services/pokemon.service';
 
 @Component({
   selector: 'app-root',
   template: `
-    <h1> {{title}}</h1>
-    <button (click)="reloadPokemons()">reload pokemons</button>
-    <app-pokemon [pokemons]="pokemons$ | async"></app-pokemon>
-    <app-pokemon [pokemons]="pokemons2$ | async"></app-pokemon>
-    <app-pokemon [pokemons]="pokemons3$ | async"></app-pokemon>
-
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">{{title}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav" routerLinkActive="active">
+      <li class="nav-item"><a class="nav-link" routerLink="home">HomeH</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="detail">Detail</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="courses">Courses</a></li>
+      </ul>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.component.scss']
 })
 
 export class AppComponent implements OnInit {
   title = 'bigdatasample'
-  pokemons$: Observable<PokemonList>
-  pokemons2$: Observable<PokemonList>
-  pokemons3$: Observable<PokemonList>
 
 
-  constructor(private pokemonService: PokemonService, private store: Store<State>) {
-    this.pokemons$ = this.pokemonService.pokemonsList$
-    // this.pokemons3$ = this.store.pipe(select('pokemon'), select('pokemons'))
-    this.pokemons2$ = this.pokemonService.pokemonsList$
-    this.pokemons3$ = this.pokemonService.pokemonsList$
-
-    // this.pokemons2$ = from([])
-    // setTimeout(() => this.pokemons2$ = this.pokemonService.pokemonsList$, 5000)
-
-
-
-
+  constructor() {
   }
 
-  reloadPokemons = () => this.store.dispatch(new ClearPokemons())
 
   ngOnInit() {
-    // setTimeout(() => this.store.dispatch(new LoadPokemons()), 3000)
   }
 
 

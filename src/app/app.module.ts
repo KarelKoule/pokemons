@@ -12,12 +12,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PokemonComponent } from './pokemon/pokemon.component';
 import { PokemonService } from './services/pokemon.service';
+import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
+import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PokemonComponent,
+    PokemonListComponent,
+    PokemonDetailComponent,
   ],
   imports: [
     BrowserModule,
