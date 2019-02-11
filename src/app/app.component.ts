@@ -10,9 +10,9 @@ import { Component, OnInit } from '@angular/core';
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav" routerLinkActive="active">
-      <li class="nav-item"><a class="nav-link" routerLink="home">HomeH</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
       <li class="nav-item"><a class="nav-link" routerLink="detail">Detail</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="courses">Courses</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
       </ul>
     </div>
   </nav>
@@ -21,17 +21,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'bigdatasample'
 
 
   constructor() {
   }
-
-
-  ngOnInit() {
-  }
-
-
-
 }

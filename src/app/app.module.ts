@@ -15,7 +15,6 @@ import { PokemonService } from './services/pokemon.service';
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
