@@ -14,12 +14,13 @@ export const initialState: State = {
 export function reducer(state = initialState, action: PokemonActions): State {
   switch (action.type) {
     case PokemonActionTypes.PokemonsLoaded:
-      console.log("loaded " + action.payload)
+      console.log("loaded " + action.payload.length)
       return { ...state, pokemons: action.payload }
     case PokemonActionTypes.ClearPokemons:
       console.log('clearing pokemons')
       return { ...state, pokemons: [] }
     default:
+      console.log(action.type + " - default state return")
       return state
   }
 }

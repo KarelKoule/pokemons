@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Observable, Subject, of, BehaviorSubject } from 'rxjs';
 import { PokemonList } from '../model/pokemon.model';
 import { Store } from '@ngrx/store';
 import { PokemonService } from '../services/pokemon.service';
 import { State } from '../reducers/pokemon.reducer';
-import { ClearPokemons } from '../actions/pokemon.actions';
+import { ClearPokemons, PokemonsLoaded } from '../actions/pokemon.actions';
+import { filter, map, tap, combineLatest, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pokemon-list',
   template: `
     <button type='button' class='btn btn-primary' (click)="reloadPokemons()">reload pokemons</button>
+    <app-filter (filterText)="filter$.next($event)"></app-filter>
   <ng-container *ngIf="(pokemons$ | async).length >0; else loading">
-    <app-pokemon [pokemons]="pokemons$ | async"></app-pokemon>
+    <app-pokemon [pokemons]="filteredPokemons$ | async"></app-pokemon>
     </ng-container>
 
     <ng-template #loading>
@@ -19,7 +21,7 @@ import { ClearPokemons } from '../actions/pokemon.actions';
     <div></div>
     <div></div>
     <div></div>
-    <div></div>
+    <div></div> 
 
 </div>
   <p>Loading...</p>
@@ -30,21 +32,21 @@ import { ClearPokemons } from '../actions/pokemon.actions';
 })
 export class PokemonListComponent {
 
-  pokemons$: Observable<PokemonList>
+  pokemons$ = this.pokemonService.pokemonsList$
 
+  filter$ = new Subject<string>()
+
+  filteredPokemons$ = this.pokemons$.pipe(
+    combineLatest(this.filter$.pipe(startWith("")), (pokemons, filterString) => {
+      console.log("combine: " + pokemons.length + " - " + filterString);
+
+      return pokemons.filter(p => p.name.includes(filterString))
+    })
+
+  )
 
 
   constructor(private pokemonService: PokemonService, private store: Store<State>) {
-    this.pokemons$ = this.pokemonService.pokemonsList$
-    // this.pokemons3$ = this.store.pipe(select('pokemon'), select('pokemons'))
-
-
-    // this.pokemons2$ = from([])
-    // setTimeout(() => this.pokemons2$ = this.pokemonService.pokemonsList$, 5000)
-
-
-
-
   }
 
   reloadPokemons = () => this.store.dispatch(new ClearPokemons())

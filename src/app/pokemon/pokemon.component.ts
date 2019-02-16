@@ -11,10 +11,10 @@ import { PokemonList } from '../model/pokemon.model';
     </li>
     </ul>
   `,
-  styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: []
 })
 export class PokemonComponent {
+  searchText = ""
 
   @Input()
   pokemons: PokemonList = []
